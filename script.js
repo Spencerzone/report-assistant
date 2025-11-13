@@ -110,6 +110,7 @@ function clearExceptOther() {
 
   document.querySelectorAll("input[type='checkbox']").forEach(cb => cb.checked = false);
   document.querySelectorAll(".pronoun-btn").forEach(btn => btn.classList.remove("active"));
+  window.scrollTo(0,0);
 }
 
 function undoComment() {
