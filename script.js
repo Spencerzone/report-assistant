@@ -59,6 +59,7 @@ function generateComment() {
   };
 
   document.getElementById("output").value = comment.trim();
+  updateCharCount();
 }
 
 function copyComment() {
@@ -214,12 +215,11 @@ const modifierSets = {
     "high",
     "regular",
     "occasional",
-    "adequate", 
-    "consistent", 
     "adequate",
-    "infrequent", 
-    "low", 
-    "irregular" 
+    "consistent",
+    "infrequent",
+    "low",
+    "irregular"
   ]
 };
 
@@ -271,7 +271,9 @@ document.addEventListener("click", (e) => {
     const rect = span.getBoundingClientRect();
     menu.style.position = "absolute";
     menu.style.top = `${window.scrollY + rect.top - 5}px`;
-    menu.style.left = `${window.scrollX + rect.left}px`;
+    const menuWidth = 140;
+    const maxLeft = window.innerWidth - menuWidth - 10;
+    menu.style.left = `${Math.min(window.scrollX + rect.left, maxLeft)}px`;
     menu.style.zIndex = "9999";
     document.body.appendChild(menu);
   } else {
@@ -287,6 +289,24 @@ studentOther.addEventListener("input", () => {
   studentOther.style.height = "auto";
   studentOther.style.height = studentOther.scrollHeight + "px";
 });
+
+function updateCharCount() {
+  const output = document.getElementById("output");
+  const count = output.value.length;
+  const el = document.getElementById("char-count");
+  if (!el) return;
+  el.textContent = `${count.toLocaleString()} characters`;
+  el.className = "char-count";
+  if (count >= 900 && count <= 1000) {
+    el.classList.add("on-target");
+  } else if (count > 800 && count < 900) {
+    el.classList.add("near-target");
+  } else if (count > 1000) {
+    el.classList.add("over-target");
+  }
+}
+
+document.getElementById("output").addEventListener("input", updateCharCount);
 
 
 
