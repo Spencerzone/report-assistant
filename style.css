@@ -252,6 +252,21 @@ select:focus {
     margin-bottom: 6px;
 }
 
+.mark-alert {
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    color: #f0c040;
+    font-size: 0.85rem;
+    transition: opacity 0.3s ease, height 0.3s ease;
+}
+
+.mark-alert.show {
+    opacity: 1;
+    height: 1.5em;
+    margin-top: 6px;
+}
+
 .pronoun-btn {
     margin-right: 10px;
     padding: 8px 16px;

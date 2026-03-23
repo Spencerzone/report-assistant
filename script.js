@@ -11,10 +11,22 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+function showMarkAlert() {
+  const el = document.getElementById("mark-alert");
+  if (!el) return;
+  el.classList.add("show");
+  setTimeout(() => el.classList.remove("show"), 3000);
+}
+
 function generateComment() {
   const name = document.getElementById("name").value.trim();
   const pronouns = document.getElementById("pronouns").value;
   const mark = document.getElementById("mark").value.trim();
+
+  if (!mark) {
+    showMarkAlert();
+    return;
+  }
   const other = document.getElementById("other").value.trim();
   const studentOther = document.getElementById("studentOther").value.trim();
 
@@ -111,6 +123,7 @@ function clearExceptOther() {
 
   document.querySelectorAll("input[type='checkbox']").forEach(cb => cb.checked = false);
   document.querySelectorAll(".pronoun-btn").forEach(btn => btn.classList.remove("active"));
+  document.querySelectorAll(".mark-btn").forEach(btn => btn.classList.remove("active"));
   window.scrollTo(0,0);
 }
 
